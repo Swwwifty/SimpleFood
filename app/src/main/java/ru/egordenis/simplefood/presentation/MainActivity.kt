@@ -1,7 +1,8 @@
-package ru.egordenis.simplefood
+package ru.egordenis.simplefood.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.egordenis.simplefood.R
 
 class MainActivity : AppCompatActivity() {
 
