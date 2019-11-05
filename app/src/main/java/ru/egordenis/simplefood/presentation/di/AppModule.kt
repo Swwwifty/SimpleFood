@@ -7,7 +7,10 @@ import ru.egordenis.simplefood.presentation.common.BaseActivity
 import ru.egordenis.simplefood.presentation.feature.recipe.RecipeListViewModel
 import ru.egordenis.simplefood.presentation.feature.recipe.RecipeRouter
 
-val appModule = module {
+/**
+ * Module for DI in recipe feature
+ */
+val recipeModule = module {
 
     factory { (view: BaseActivity) -> RecipeRouter(view) }
 

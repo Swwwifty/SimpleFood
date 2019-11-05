@@ -4,6 +4,9 @@ import android.os.Bundle
 import ru.egordenis.simplefood.R
 import ru.egordenis.simplefood.presentation.common.BaseActivity
 
+/**
+ * Main Activity class for the application
+ */
 class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
