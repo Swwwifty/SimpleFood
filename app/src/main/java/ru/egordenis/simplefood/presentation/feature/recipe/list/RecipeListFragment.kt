@@ -15,7 +15,7 @@ import ru.egordenis.simplefood.presentation.feature.recipe.RecipeListViewModel
  */
 class RecipeListFragment : BaseFragment() {
 
-    private val viewModel: RecipeListViewModel by viewModel { parametersOf(this) }
+    private val viewModel: RecipeListViewModel by viewModel { parametersOf(this.activity) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
