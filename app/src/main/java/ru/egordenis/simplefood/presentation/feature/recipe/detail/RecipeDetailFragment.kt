@@ -1,4 +1,4 @@
-package ru.egordenis.simplefood.presentation.feature.recipedetail
+package ru.egordenis.simplefood.presentation.feature.recipe.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

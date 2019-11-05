@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/recipe_list_fragment"
-        android:name="ru.egordenis.simplefood.presentation.feature.recipelist.RecipeListFragment"
+        android:name="ru.egordenis.simplefood.presentation.feature.recipe.list.RecipeListFragment"
         tools:layout="@layout/fragment_recipe_list">
 
         <action
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/recipe_detail_fragment"
-        android:name="ru.egordenis.simplefood.presentation.feature.recipedetail.RecipeDetailFragment"
+        android:name="ru.egordenis.simplefood.presentation.feature.recipe.detail.RecipeDetailFragment"
         tools:layout="@layout/fragment_recipe_detail">
 
         <argument

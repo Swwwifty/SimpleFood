@@ -16,4 +16,5 @@ abstract class BaseFragment : Fragment() {
      * hide loader
      */
     protected fun hideLoading() = {}
+
 }

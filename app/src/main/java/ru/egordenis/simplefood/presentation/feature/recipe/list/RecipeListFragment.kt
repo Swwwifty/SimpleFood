@@ -1,20 +1,21 @@
-package ru.egordenis.simplefood.presentation.feature.recipelist
+package ru.egordenis.simplefood.presentation.feature.recipe.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import ru.egordenis.simplefood.R
-import ru.egordenis.simplefood.presentation.MainViewModel
 import ru.egordenis.simplefood.presentation.common.BaseFragment
+import ru.egordenis.simplefood.presentation.feature.recipe.RecipeListViewModel
 
 /**
  * Fragment for show the list of recipes
  */
 class RecipeListFragment : BaseFragment() {
 
-    val mainViewModel: MainViewModel by viewModel()
+    private val viewModel: RecipeListViewModel by viewModel { parametersOf(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +27,7 @@ class RecipeListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel.select(1)
+        viewModel.showRecipeDetail(id)
     }
 
 }
