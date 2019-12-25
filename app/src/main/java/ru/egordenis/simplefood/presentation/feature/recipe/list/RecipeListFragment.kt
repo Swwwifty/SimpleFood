@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_recipe_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -19,10 +20,6 @@ class RecipeListFragment : BaseFragment() {
 
     private val viewModel: RecipeListViewModel by viewModel { parametersOf(this.activity) }
 
-    private val spinnerView = spinner
-
-    private val recipeName = recipe_name
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,12 +32,17 @@ class RecipeListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         subscribeToRecipeList()
         subscribeToSpinner()
+        subscripeToSnackbar()
     }
 
     private fun subscribeToRecipeList() {
         viewModel.recipeList
             .observe(this, Observer { value ->
-                recipe_name.text = value[0].name
+                if (value.isNotEmpty()) {
+                    recipe_name.text = value[0].name
+                } else {
+                    recipe_name.text = ""
+                }
             })
     }
 
@@ -51,6 +53,18 @@ class RecipeListFragment : BaseFragment() {
         viewModel.spinner.observe(this, Observer { value ->
             value.let { show ->
                 spinner.visibility = if (show) View.VISIBLE else View.GONE
+            }
+        })
+    }
+
+    /**
+     * Show a snackbar whenever the [RecipeListViewModel.snackbar] is updated a non-null value
+     */
+    private fun subscripeToSnackbar() {
+        viewModel.snackbar.observe(this, Observer { text ->
+            text?.let {
+                Snackbar.make(fragment_recipe_list, text, Snackbar.LENGTH_SHORT).show()
+                viewModel.onSnackbarShown()
             }
         })
     }

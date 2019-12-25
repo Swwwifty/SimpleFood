@@ -26,12 +26,13 @@ class RecipeListViewModel(
 
     private val _snackBar = MutableLiveData<String?>()
 
-    private fun loadRecipeList() {
-        viewModelScope.launch {
-            val result = recipeListInteractor.getRecipeList()
-            if (result.isSuccess) {
-                _recipeList.value = result.getOrNull() ?: listOf()
-            }
+    private fun loadRecipeList() = launchDataLoad {
+        val result = recipeListInteractor.getRecipeList()
+        if (result.isSuccess) {
+            _recipeList.value = result.getOrNull() ?: listOf()
+        } else {
+            _recipeList.value = listOf()
+            _snackBar.value = "Unable to refresh recipe list"
         }
     }
 
@@ -58,6 +59,34 @@ class RecipeListViewModel(
      */
     fun showRecipeDetail(id: Int) {
         router.showRecipeDetail(id)
+    }
+
+    /**
+     * Called immediately after the UI shows the snackbar.
+     */
+    fun onSnackbarShown() {
+        _snackBar.value = null
+    }
+
+    /**
+     * Helper function to call a data load function with a loading spinner, errors will trigger a
+     * snackbar.
+     *
+     * @param block lambda to actually load data. It is called in the viewModelScope. Before calling the
+     *              lambda the loading spinner will display, after completion or error the loading
+     *              spinner will stop
+     */
+    private fun launchDataLoad(block: suspend () -> Unit) {
+        viewModelScope.launch {
+            try {
+                _spinner.value = true
+                block()
+            } catch (error: Throwable) {
+                _snackBar.value = error.message
+            } finally {
+                _spinner.value = false
+            }
+        }
     }
 
 }
