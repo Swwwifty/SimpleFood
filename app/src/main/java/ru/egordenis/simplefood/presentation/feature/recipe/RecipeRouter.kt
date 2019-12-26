@@ -1,7 +1,7 @@
 package ru.egordenis.simplefood.presentation.feature.recipe
 
 /**
- * Interface of navigation router for recipe feature
+ * Navigation router interface for recipe feature
  */
 interface RecipeRouter {
 

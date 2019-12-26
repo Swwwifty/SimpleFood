@@ -3,6 +3,7 @@ package ru.egordenis.simplefood.presentation.common
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import ru.egordenis.simplefood.presentation.di.recipeDataModule
 import ru.egordenis.simplefood.presentation.di.recipeModule
 
 /**
@@ -14,7 +15,7 @@ class BaseApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@BaseApplication)
-            modules(recipeModule)
+            modules(listOf(recipeModule, recipeDataModule))
         }
     }
 
